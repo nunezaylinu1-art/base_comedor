@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Administrador SCALI</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+<!-- HEADER reutilizado -->
+<header class="header">
+  <img src="img/logo-blanco.png" class="logo" id="logo">
+
+  <nav class="nav">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="index.html" onclick="logout()">Salir</a>
+  </nav>
+</header>
+
+<!-- SIDEBAR -->
+<div class="container">
+
+  <aside class="sidebar">
+    <h3>Admin</h3>
+    <ul>
+      <li onclick="showSection('menu')">🍽️ Menú</li>
+      <li onclick="showSection('usuarios')">👤 Usuarios</li>
+      <li onclick="showSection('productos')">📦 Productos</li>
+    </ul>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="main">
+
+    <!-- MENÚ -->
+    <section id="menu" class="section active">
+      <h2>Gestión de Menú</h2>
+
+      <form id="formMenu">
+        <input type="text" placeholder="Nombre" id="nombre" required>
+        <input type="number" placeholder="Precio" id="precio" required>
+        <button>Agregar</button>
+      </form>
+
+      <div id="listaMenu"></div>
+    </section>
+
+
+    <!-- USUARIOS -->
+    <section id="usuarios" class="section">
+      <h2>Usuarios</h2>
+
+    <form onsubmit="registrar(event)">
+    <input type="text" id="nombre" placeholder="Nombre" required><br><br>
+    <input type="text" id="apellido" placeholder="Apellido" required><br><br>
+    <input type="text" id="documento" placeholder="Cédula / RUC" required><br><br>
+    <input type="text" id="direccion" placeholder="Dirección" required><br><br>
+    <input type="text" id="telefono" placeholder="Teléfono" required><br><br>
+    <input type="email" id="email"placeholder="Correo electrónico"><br><br>
+    <input type="text" id="usuario"placeholder="Nombre de Ususario"><br><br>
+    <input type="password" id="password" placeholder="Contraseña" required><br><br>
+
+  <select id="rol">
+  <option value="super_administrador">Super Administrador</option>
+  <option value="cajero">Cajero</option>
+  <option value="proveedor">Proveedor</option>
+  <option value="cliente_interno">Cliente Interno</option>
+  <option value="cliente_externo">Cliente Externo</option>
+  </select><br><br>
+
+    <button>Registrar</button>
+  </form>
+    </section>
+    <script src="dashboard.js">
+      document.getElementById('registerForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const usuario = document.getElementById('usuario').value;
+      const password = document.getElementById('password').value;
+      const res = await fetch('..api', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ usuario, password })
+      });
+  const msg = document.getElementById('msg');
+  if (res.ok) {
+    msg.innerText = 'Registro exitoso ✅';
+    setTimeout(() => {
+      window.location.href = '/dashboard.html';
+    }, 1500);
+  } else {
+    msg.innerText = await res.text();
+  }
+});
+</script>
+
+    
+    <!-- PRODUCTOS -->
+    <section id="productos" class="section">
+      <h2>PRODUCTOS</h2>
+      <p>Gestión de pedidos (próximo módulo)</p>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

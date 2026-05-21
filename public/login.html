@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/estilos.css">
+    
+</head class="header">
+<body>
+    <div class="logo-container, nav">
+    <img src="./img/logo-blanco.png" alt="Bio Alimentar" class="logo" id="logo">
+  </div>
+
+<div class="hero">
+
+    <div class="hero">
+
+        <h2>Iniciar Sesión</h2>
+
+        <input type="text" id="usuario" placeholder="Usuario"><br><br>
+        <input type="password" id="password" placeholder="Contraseña"><br><br>
+        <button onclick="login()">Ingresar</button>
+        
+        <a href="index.html">
+        <button onclick="login()">
+           Cancelar
+        </button>
+        </a>
+
+
+        <p id="mensaje"></p>
+        <a href="registro.html">Crear cuenta</a>
+    //</div>
+
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>
+<script>
+const express = require('express');
+const router = express.Router();
+const authController = require('../auth');
+router.post('/registro', authController.registro);
+router.post('/login', authController.login);
+module.exports = router;
+</script>
+</body>
+</html>
